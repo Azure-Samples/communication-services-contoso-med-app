@@ -1,0 +1,191 @@
+.doctor-profile-column{
+    padding-right: 0px;
+}
+
+.doctor-profile{
+    max-height: 100%;
+    max-width: 100%;
+    /*padding: 6px;
+    border: 1px solid rgba(128, 128, 128, 0.507);
+    border-radius: 4px; */
+    display: inline-block;
+}
+
+.doctor-profile-round{
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.doctor-specialty{
+    display: inline;
+    font-weight: 500;
+    margin-right: 24px;
+}
+
+.doctor-experience{
+    display: inline;
+}
+
+.card-header-icon{
+    font-size: small;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    background: #ffff;
+    color: #446bc4;
+    vertical-align: middle;
+    outline: none;
+    border: none;
+    margin-right: 6px;
+}
+
+.card-header-icon:hover{
+    cursor: default;
+}
+
+.card-header-icon:focus{
+    outline: none;
+}
+
+.card-header-title{
+    color: #ffff;
+}
+
+.slot-option{
+    margin-right: 20px;
+    margin-bottom: 14px;
+    font-size: small;
+    border: 1px solid rgba(0, 0, 0, 0.425);
+    border-radius: 4px;
+    padding: 8px;
+    display: inline-block;
+    transition: 0.2s;
+}
+
+.slot-option-radio{
+    vertical-align: top;
+    display: inline;
+    margin-right: 6px;
+}
+
+.slot-option-radio:hover{
+    cursor: pointer;
+}
+
+.slot-option-radio:checked{
+    background-color: #24bdce;
+}
+
+.slot-number{
+    margin-left: 4px;
+    display: inline;
+}
+
+.slot-option:hover{
+    border: 1px solid #24bdce;
+    color: #24bdce;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.slot-option-label:hover{
+    cursor: pointer;
+}
+
+.slot-available{
+    color: #24bdce;
+}
+
+.slot-selected {
+    border: 2px solid #24bdce !important;
+    color: #24bdce;
+    font-weight: 500;
+}
+
+.slot-occupied {
+    background: #ddd;
+}
+
+.slot-occupied:hover {
+    cursor: default !important;
+    color: #212529 !important;
+}
+
+.time-slot-option{
+    font-size: small;
+    margin-right: 12px;
+    margin-bottom: 12px;
+    display: inline-block;
+    padding: 4px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.486);
+    border-radius: 4px;
+}
+
+.time-slot-option:hover{
+    color: #24bdce;
+    border: 1px solid #24bdce;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.doctor-card-right{
+    padding: 14px;
+}
+
+.doctor-card-right-name{
+    font-weight: 500;
+}
+
+.doctor-card-right-specialty{
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.selected-slot-info{
+    font-size: small;
+    border-right: 1px solid rgba(128, 128, 128, 0.281);
+}
+
+.info{
+    font-size: small;
+}
+
+.info-title{
+    font-size: small;
+}
+
+.consultation-for{
+    font-size: 14px;
+    color: #446bc4;
+}
+
+.patient-details-form-item{
+    border-radius: 0px;
+    font-size: small;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.confirm-btn{
+    width: 100%;
+    margin-top: 14px;
+    border: 1px solid #24bdce;
+    background: #24bdce;
+    font-weight: 500;
+    font-size: medium;
+    padding: 6px 8px;
+    color: #ffff;
+    transition: 0.2s;
+}
+
+.confirm-btn:hover{
+    background: #ffff;
+    color: #24bdce;
+    border: 1px solid #24bdce;
+}
+
+.confirm-btn:focus{
+    outline: none;
+}

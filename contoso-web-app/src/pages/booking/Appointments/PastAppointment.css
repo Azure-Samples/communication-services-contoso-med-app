@@ -1,0 +1,138 @@
+.doctor-card{
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ffff;
+    box-shadow: 4px 2px 4px 2px rgba(0, 0, 0, 0.034), 6px 10px 12px 6px rgba(0, 0, 0, 0.041);
+}
+
+.doctor-card:hover{
+    border: 1px solid #24bdce;
+    cursor: pointer;
+}
+
+.doctor-profile-column{
+    padding-right: 0px;
+}
+
+.doctor-profile{
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.doctor-card-sections{
+    display: inline-block;
+}
+
+button:focus{
+    outline: none;
+}
+
+.btn-group{
+    margin-top: 8px;
+}
+
+.btn-group-item{
+    font-size: small;
+    margin-left: 6px;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+}
+
+.video-call-btn{
+    color: #446bc4;
+    border: 1px solid #446bc4;
+    background: #ffff;
+    transition: 0.2s;
+    margin-left: 0px;
+}
+
+.video-call-btn:hover{
+    color: #ffff;
+    border: 1px solid #ffff;
+    background: #446bc4;
+    transition: 0.2s;
+}
+
+.profile-btn{
+    color: #37ce87;
+    border: 1px solid #37ce87;
+    background: #ffff;
+    transition: 0.2s;
+}
+
+.profile-btn:hover{
+    color: #ffff;
+    border: 1px solid #ffff;
+    background: #37ce87;
+    transition: 0.2s;
+}
+
+.chat-btn{
+    color: #9352cf;
+    border: 1px solid #9352cf;
+    background: #ffff;
+    transition: 0.2s;
+}
+
+.chat-btn:hover{
+    color: #ffff;
+    border: 1px solid #ffff;
+    background: #9352cf;
+    transition: 0.2s;
+}
+
+.doctor-info-row{
+    margin-bottom: 12px;
+}
+
+.doctor-info-icons{
+    font-size: 14px;
+    padding-top: 4px;
+    margin-right: 4px;
+}
+
+.doctor-info-text{
+    font-size: 14px;
+}
+
+.slot-time-text{
+    color: #24bdce;
+    display: inline;
+}
+
+.book-consultation-row{
+    margin-bottom: 24px;
+    align-content: flex-end;
+}
+
+.book-consultation-text{
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.feedback-btn{
+    font-size: 15px;
+    font-weight: 500;
+    color: #ffff;
+    border: 1px solid #24bdce;
+    border-radius: 2px;
+    background: #24bdce;
+    transition: 0.2s;
+    padding: 4px 10px;
+}
+
+.feedback-btn:hover{
+    background: #ffff;
+    color: #24bdce;
+    transition: 0.4s;
+}
+
+.completed{
+    padding: 1px 14px;
+    border-radius: 14px;
+    color: #37ce87;
+    border: 1px solid #37ce87;
+}

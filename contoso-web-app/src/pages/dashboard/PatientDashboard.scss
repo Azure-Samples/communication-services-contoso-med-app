@@ -1,0 +1,280 @@
+$--boxShadow: 5px 10px 20px rgba(0, 0, 0, 0.08);
+$--linearGradient: linear-gradient(to bottom right, #7bde9d, #52b7e1);
+
+.body {
+  display: flex;
+  flex-direction: row;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.profile-space {
+  display: flex;
+  align-items: center;
+}
+
+.profile-avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.08);
+
+  & > img {
+    height: 34%;
+    padding: 16px;
+  }
+}
+
+.pf-card-button{
+  border-radius: 16px;
+  border: 1px solid;
+  color: #999999;
+  border-color: #e8e8e8;
+  background-color: white;
+  padding-inline-end: 16px;
+  padding-inline-start: 16px;
+}
+
+.Container {
+  height: 180px;
+  margin-left: 1em;
+  display: flex;
+  max-width: 400px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.right {
+  background-color: rgb(255, 255, 255);
+  border-radius: 0px 16px 16px 0px;
+  width: 55%;
+  height: 100%;
+  margin-top: 0px;
+  display: inline-block;
+}
+
+.left-image {
+  height: 100%;
+  display: inline-block;
+  width: 45%;
+  object-fit: cover;
+}
+
+.link {
+  color: rgb(58, 169, 179);
+}
+
+.topBackground {
+  width: 100%;
+  height: 40vh;
+  display: inline-flex;
+}
+
+.topBackground .gradient {
+  background-image: $--linearGradient;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.topBackground .image {
+  background-image: url('../../assets/images/homepage-bg.jpg');
+  object-fit: cover;
+  width: 100%;
+  display: inline-block;
+}
+
+.proffesion-card-holder {
+  display: inline-flex;
+}
+
+.background {
+  display: flex;
+}
+
+.foreground {
+  position: absolute;
+  flex: 1;
+}
+
+.profession-cards-div {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  display: inline-flex;
+  width: 90vw;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 10rem;
+}
+
+input[type="button"].show-list {
+  &:hover {
+    background-color: #2AC2D1;
+    color: white;
+  }
+  transition: all 0.3s;
+  margin-top: 0.8rem;
+  padding: 0.5rem 2rem;
+  border-radius: 2rem;
+  border: 1px solid #a5a5a5;
+}
+.bubble{
+  background-color: rgb(88,212,103);
+  border-radius: 50%;
+
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  z-index: 10;
+  
+  height: 80px;
+  width: 80px;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bubble:hover{
+  box-shadow: $--boxShadow;
+}
+
+.icon-bubble{
+  height: 40px;
+  color:white;
+}
+
+.chat-window{
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+
+  height: 30em;
+  width: 25em;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background-color: white;
+  box-shadow: $--boxShadow;
+}
+
+.cw-header{
+  min-height: 4em;
+  display: flex;
+  gap:1.5em;
+  align-items: center;
+  padding-left: 2em;
+}
+
+.cw-form{
+  display: flex;
+  height: 4em;
+}
+
+.cw-sendbtn{
+  flex: 1;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 4em;
+  background-color: #fff;
+}
+
+.cw-msg-inp{
+  flex: 4;
+  border:0px;
+  width: 100%;
+  padding-left: 1em;
+}
+
+.gradient{
+  background-image: $--linearGradient;
+  object-fit: fill;
+  width: 100%;
+}
+
+.message-box{
+  flex:1;
+  overflow-y: scroll;
+}
+
+.sender-name {
+  color: #666;
+  font-size: small;
+  padding: 0 4px;
+}
+
+.my-message, .their-message {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin: 0;
+  }
+}
+
+.my-message{
+  display: flex;
+  margin: 8px;
+  align-items: flex-end;
+  
+  .text{
+    padding: 8px;
+    display: inline-block;
+    background-color: rgb(42,194,209);
+    color:white;
+    margin:4px;
+  }
+}
+
+.their-message{
+  margin:8px;
+  align-items: flex-start;
+  .text{
+    padding: 8px;
+    display: inline-block;
+    background-color: rgb(247,247,247);
+    margin:4px;
+  }
+
+  .interactive-buttons{
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    color:white;
+  }
+}
+
+.interactive-msg-btn{
+  padding: 8px;
+  background-color: white;
+  // according to specs this is the border
+  // border: 0.5px solid #EEEEEE;
+  border: 0.5px solid grey;
+}

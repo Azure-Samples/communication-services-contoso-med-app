@@ -1,0 +1,29 @@
+.App{
+  height: 89%;
+}
+
+.chat-screen{
+  height: 100%;
+}
+
+.chat-user-list{
+  display: inline-block;
+  width: 32%;
+  /* max-width: 400px; */
+  height: 100%;
+  border: 2px solid rgba(128, 128, 128, 0.164);
+}
+
+.chat-user-list-header{
+  font-size: larger;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.164);
+}
+
+.chat-area{
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 68%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.041);
+}

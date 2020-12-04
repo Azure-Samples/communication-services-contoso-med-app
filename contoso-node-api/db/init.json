@@ -1,0 +1,650 @@
+{
+    "patients": [
+        {
+            "email": "user001@contosomed.com",
+            "password": "001",
+            "name": "Caleb Foster"
+        },
+        {
+            "email": "user002@contosomed.com",
+            "password": "002",
+            "name": "Reuben Oxly"
+        },
+        {
+            "email": "user003@contosomed.com",
+            "password": "003",
+            "name": "Mammie Brummit"
+        },
+        {
+            "email": "user004@contosomed.com",
+            "password": "004",
+            "name": "Cassaundra Heidel"
+        }
+    ],
+    "doctors": [
+        {
+            "_id": "5f5116bfac79513cfc99e3c0",
+            "id": "1",
+            "name": "Shen Mi",
+            "email": "doctor001@contosomed.com",
+            "password": "001",
+            "location": "Los Angeles",
+            "speciality": "Orthologist",
+            "degree": "MD",
+            "pictureUrl": "shen-mi.png",
+            "experience": 10,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3c1",
+            "id": "2",
+            "name": "Fei Xiong",
+            "email": "doctor002@contosomed.com",
+            "password": "002",
+            "location": "Los Angeles",
+            "speciality": "Cardiologist",
+            "degree": "MD",
+            "pictureUrl": "fei-xiong.png",
+            "experience": 11,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3c2",
+            "id": "3",
+            "name": "Hui Chian",
+            "email": "doctor003@contosomed.com",
+            "password": "003",
+            "location": "Los Angeles",
+            "speciality": "Oncologist",
+            "degree": "MD",
+            "pictureUrl": "hui-chian.png",
+            "experience": 9,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3c3",
+            "id": "4",
+            "name": "Shi He",
+            "email": "doctor004@contosomed.com",
+            "password": "004",
+            "location": "Los Angeles",
+            "speciality": "Neurologist",
+            "degree": "MD",
+            "pictureUrl": "shi-he.png",
+            "experience": 8,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3c4",
+            "id": "5",
+            "name": "Ting Niu",
+            "email": "doctor005@contosomed.com",
+            "password": "005",
+            "location": "Los Angeles",
+            "speciality": "Dentist",
+            "degree": "MD",
+            "pictureUrl": "ting-niu.png",
+            "experience": 7,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3c5",
+            "id": "6",
+            "name": "An Ni",
+            "email": "doctor006@contosomed.com",
+            "password": "006",
+            "location": "Los Angeles",
+            "speciality": "Dentist",
+            "degree": "MD",
+            "pictureUrl": "an-ni.png",
+            "experience": 6,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3c6",
+            "id": "7",
+            "name": "Jiang Li Liu",
+            "email": "doctor007@contosomed.com",
+            "password": "007",
+            "location": "Los Angeles",
+            "speciality": "Dentist",
+            "degree": "MD",
+            "pictureUrl": "jiang-li-liu.jpg",
+            "experience": 10,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3c7",
+            "id": "8",
+            "name": "Hua Long",
+            "email": "doctor008@contosomed.com",
+            "password": "008",
+            "location": "Los Angeles",
+            "speciality": "Dentist",
+            "degree": "MD",
+            "pictureUrl": "hua-long.png",
+            "experience": 11,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3c8",
+            "id": "9",
+            "name": "Cora Thomas",
+            "email": "doctor009@contosomed.com",
+            "password": "009",
+            "location": "Los Angeles",
+            "speciality": "Dentist",
+            "degree": "MD",
+            "pictureUrl": "cora-thomas.jpg",
+            "experience": 12,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3c9",
+            "id": "10",
+            "name": "Kayla Lewis",
+            "email": "doctor010@contosomed.com",
+            "password": "010",
+            "location": "Los Angeles",
+            "speciality": "Orthologist",
+            "degree": "MD",
+            "pictureUrl": "kayla-lewis.png",
+            "experience": 20,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3ca",
+            "id": "11",
+            "name": "Monica Thomson",
+            "email": "doctor011@contosomed.com",
+            "password": "011",
+            "location": "Los Angeles",
+            "speciality": "Orthologist",
+            "degree": "MD",
+            "pictureUrl": "monica-thomson.png",
+            "experience": 14,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3cb",
+            "id": "12",
+            "name": "Victoria Burke",
+            "email": "doctor012@contosomed.com",
+            "password": "012",
+            "location": "Los Angeles",
+            "speciality": "Cardiologist",
+            "degree": "MD",
+            "pictureUrl": "victoria-burke.png",
+            "experience": 25,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3cc",
+            "id": "13",
+            "name": "Jayesh Gupta",
+            "email": "doctor013@contosomed.com",
+            "password": "013",
+            "location": "Los Angeles",
+            "speciality": "General Physician",
+            "degree": "MD",
+            "pictureUrl": "jayesh-gupta.png",
+            "experience": 18,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3cd",
+            "id": "14",
+            "name": "Prashant Chourey",
+            "email": "doctor014@contosomed.com",
+            "password": "014",
+            "location": "Los Angeles",
+            "speciality": "Cardiologist",
+            "degree": "MD",
+            "pictureUrl": "prashant-chourey.png",
+            "experience": 16,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3ce",
+            "id": "15",
+            "name": "Abhishek Khurana",
+            "email": "doctor015@contosomed.com",
+            "password": "015",
+            "location": "Los Angeles",
+            "speciality": "Cardiologist",
+            "degree": "MD",
+            "pictureUrl": "abhishek-khurana.png",
+            "experience": 13,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3cf",
+            "id": "16",
+            "name": "Bhupesh Menon",
+            "email": "doctor016@contosomed.com",
+            "password": "016",
+            "location": "Los Angeles",
+            "speciality": "Neurologist",
+            "degree": "MD",
+            "pictureUrl": "bhupesh-menon.png",
+            "experience": 14,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3d0",
+            "id": "17",
+            "name": "Reena Shrivastav",
+            "email": "doctor017@contosomed.com",
+            "password": "017",
+            "location": "Los Angeles",
+            "speciality": "General Physician",
+            "degree": "MD",
+            "pictureUrl": "reena-shrivastav.png",
+            "experience": 14,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3d1",
+            "id": "18",
+            "name": "Richa Choukse",
+            "email": "doctor018@contosomed.com",
+            "password": "018",
+            "location": "Los Angeles",
+            "speciality": "Neurologist",
+            "degree": "MD",
+            "pictureUrl": "richa-choukse.jpg",
+            "experience": 15,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3d2",
+            "id": "19",
+            "name": "Chetana Hegde",
+            "email": "doctor019@contosomed.com",
+            "password": "019",
+            "location": "Los Angeles",
+            "speciality": "Neurologist",
+            "degree": "MD",
+            "pictureUrl": "chetana-hegde.png",
+            "experience": 15,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3d3",
+            "id": "20",
+            "name": "Chandrika Gupta",
+            "email": "doctor020@contosomed.com",
+            "password": "020",
+            "location": "Los Angeles",
+            "speciality": "Orthologist",
+            "degree": "MD",
+            "pictureUrl": "chandrika-gupta.png",
+            "experience": 11,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3d4",
+            "id": "21",
+            "name": "Aaron Gonzales",
+            "email": "doctor021@contosomed.com",
+            "password": "021",
+            "location": "Los Angeles",
+            "speciality": "General Physician",
+            "degree": "MD",
+            "pictureUrl": "aaron-gonzales.jpg",
+            "experience": 21,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3d5",
+            "id": "22",
+            "name": "Brandon Stuart",
+            "email": "doctor022@contosomed.com",
+            "password": "022",
+            "location": "Los Angeles",
+            "speciality": "Orthologist",
+            "degree": "MD",
+            "pictureUrl": "brandon-stuart.jpg",
+            "experience": 13,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3d6",
+            "id": "23",
+            "name": "Andre Lawson",
+            "email": "doctor023@contosomed.com",
+            "password": "023",
+            "location": "Los Angeles",
+            "speciality": "Oncologist",
+            "degree": "MD",
+            "pictureUrl": "andre-lawson.jpg",
+            "experience": 18,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        },
+        {
+            "_id": "5f5116bfac79513cfc99e3d7",
+            "id": "24",
+            "name": "Mateo Gomez",
+            "email": "doctor024@contosomed.com",
+            "password": "024",
+            "location": "Los Angeles",
+            "speciality": "General Physician",
+            "degree": "MD",
+            "pictureUrl": "mateo-gomez.png",
+            "experience": 17,
+            "reviews": [
+                {
+                    "rating": 5,
+                    "username": "John Doe",
+                    "feedbackText": ""
+                }
+            ],
+            "slots": [
+            ],
+            "availableMediums": [
+                "chat",
+                "videoCall",
+                "voice"
+            ]
+        }
+    ]
+}

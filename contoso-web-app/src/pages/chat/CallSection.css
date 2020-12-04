@@ -1,0 +1,252 @@
+.call-section {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 65%;
+    height: 100%;
+    display: inline-block;
+    overflow: hidden;
+    background: #000D;
+}
+
+.call-persona{
+    height: 140px;
+    position: relative;
+    text-align: center;
+    border-radius: 50%;
+    top: 34%;
+}
+
+.call-persona img{
+    height: 100%;
+    border-radius: 50%;
+}
+
+.speaking{
+    border: 2px solid #24bdce;
+}
+
+.connection-state-info{
+    padding-top: 20px;
+    font-size: 24px;
+    font-weight: 500;
+    color: rgba(87, 84, 84, 0.867);
+}
+
+.call-section-video-stream {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+div.video-stream div{
+    height: 100%;
+    width: 100%;
+}
+
+.video-stream {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+div.video-stream div video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    background: rgb(66, 65, 65);
+}
+
+.call-section-btn-group {
+    position: absolute;
+    /* bottom: 12%; */
+    bottom: 0px;
+    width: 100%;
+    padding: 24px;
+    background: #000E;
+    text-align: center;
+}
+
+.call-section-btn {
+    width: 54px;
+    height: 54px;
+    font-size: larger;
+    border: none;
+    border-radius: 50%;
+    margin-right: 16px;
+    color: #ffff;
+    background: rgb(70, 68, 68);
+}
+
+.call-end-btn {
+    background: rgb(209, 64, 64);
+}
+
+.call-accept-btn {
+    background: rgb(46, 196, 84);
+}
+
+/*  */
+
+.chat-area-header {
+    width: 100%;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.164);
+    position: relative;
+    background: #ffff;
+}
+
+.chat-area-header-details {
+    display: inline-block;
+    margin-left: 12px;
+}
+
+.chat-area-header-name {
+    font-weight: 700;
+}
+
+.chat-area-header-subtitle {
+    font-size: 12.8px;
+    font-weight: 400;
+    color: gray;
+}
+
+.chat-area-header-options {
+    float: right;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+
+.chat-area-header-call-btn {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #37ce87;
+    color: #37ce87;
+    background: white;
+    transition: 0.2s;
+    margin-right: 12px;
+}
+
+.chat-area-header-call-btn:hover {
+    background: #37ce87;
+    color: #ffff;
+    transition: 0.2s;
+}
+
+.chat-area-header-book-btn {
+    border-radius: 4px;
+    border: 1px solid #24bdce;
+    color: #ffff;
+    background: #24bdce;
+    transition: 0.2s;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.chat-area-header-book-btn:hover {
+    background: #ffff;
+    color: #24bdce;
+    transition: 0.2s;
+}
+
+.chat-area-footer {
+    position: absolute;
+    bottom: 24px;
+    width: 100%;
+}
+
+.chat-area-footer-sub-section {
+    display: flex;
+    flex-direction: row;
+    width: 92%;
+    height: 40px;
+    background: #ffff;
+}
+
+.chat-area-message-textbox {
+    /* width: 84%; */
+    flex: 1;
+    border-right: 1px solid rgba(128, 128, 128, 0.205);
+}
+
+.chat-area-message-textbox:focus {
+    outline: none;
+}
+
+.chat-area-message-send-btn {
+    border: none;
+    color: black;
+    background: white;
+    padding: 0 1rem;
+}
+
+.chat-area-body {
+    height: 76%;
+    overflow-y: scroll;
+}
+
+.chat-area-table {
+    width: 100%;
+}
+
+.chat-bubble {
+    width: 100%;
+}
+
+.message-user-name {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.63);
+    margin-bottom: 5px;
+}
+
+.sender-chat-bubble {
+    margin-left: 14px;
+    margin-top: 12px;
+    float: left;
+    max-width: 250px;
+    min-width: 70px;
+}
+
+.sender-chat-bubble-box {
+    background: #ffff;
+    padding: 6px 8px;
+}
+
+.receiver-chat-bubble {
+    margin-right: 14px;
+    margin-top: 12px;
+    float: right;
+    max-width: 250px;
+    min-width: 70px;
+    text-align: right;
+}
+
+.receiver-chat-bubble-box {
+    background: rgba(128, 128, 128, 0.192);
+    padding: 6px 8px;
+}
+
+.message-content {
+    word-wrap: break-word;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.message-date-time {
+    font-size: 11.6px;
+    color: gray;
+    margin-top: 6px;
+}
+
+.chat-user-profile {
+    display: inline-block;
+}
+
+.chat-user-image {
+    width: 40px;
+    height: 40px;
+}

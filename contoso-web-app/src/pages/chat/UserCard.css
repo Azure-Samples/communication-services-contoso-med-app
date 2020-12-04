@@ -1,0 +1,92 @@
+.user-card{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.164);
+    position: relative;
+    border-right: 2px solid #ffff;
+    transition: 0.2s;
+}
+
+.user-card:hover {
+    cursor: pointer;
+    border-right: 3.6px solid #24bdce;
+    background: rgba(128, 128, 128, 0.068);
+    transition: 0.2s;
+}
+
+.user-card-selected{
+    border-right: 3.6px solid #24bdce;
+    background: rgba(128, 128, 128, 0.068);
+    transition: 0.2s;
+}
+
+.user-card-date-time{
+    font-size: 12px;
+    color: rgba(128, 128, 128, 0.753);
+    position: absolute;
+    right: 8px;
+    top: 6px;
+}
+
+.user-persona{
+    border-radius: 50%;
+    max-width: 140px;
+    max-height: 140px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+.user-image{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.user-status{
+    width: 16px;
+    height: 16px;
+    border: 3px solid white;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 4px;
+    right: 0px;
+}
+
+.online{
+    background: green;
+}
+
+.offline{
+    background: gray;
+}
+
+.away{
+    background: yellow;
+}
+
+.oncall{
+    background: red;
+}
+
+.user-info{
+    display: inline-block;
+    margin-left: 12px;
+    font-size: 13.6px;
+}
+
+.user-name{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.user-subtitle{
+    font-weight: 400;
+    color: gray;
+}
+
+.user-extra-info{
+    margin-top: 14px;
+}
+
+.theme-blue{
+    color: #24bdce;
+}

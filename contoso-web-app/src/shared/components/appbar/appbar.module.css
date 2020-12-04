@@ -1,0 +1,62 @@
+.topbar {
+    height: 5em;
+    width: 100% !important;
+  }
+  
+  .image {
+    height: 100%;
+    width: 100%;
+    background-image: url("https://res.cloudinary.com/dtldj8hpa/image/upload/v1598608290/projects/AcsTeleMed/banner.png");
+  }
+  
+  .gradient {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to bottom right, #7bde9d, #52b7e1);
+    opacity: 0.9;
+  }
+  
+  .topbar-content {
+    display: flex;
+    color: white;
+    align-items: center;
+    height: 100%;
+    padding-right: 1em;
+  }
+  
+  .topbar-left {
+    display: flex;
+    margin: 16px;
+  }
+
+  .topbar-left:hover {
+    cursor: pointer;
+  }
+  
+  .topbar-right {
+    margin-left: auto;
+  }
+  
+  .icon {
+    height: 20px;
+    margin-top: 4px;
+    margin-right: 16px;
+  }
+  
+  .profile-space {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .notif-icon {
+    display: inline;
+  }
+  
+  .profile-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  

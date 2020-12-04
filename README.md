@@ -1,57 +1,45 @@
-# Project Name
+# Azure Communication Services Demo with Contoso Med App
 
-(short, 1-3 sentenced, description of the project)
+This is a sample application showing how quickly and easily it is to add the Azure Communication Services to a Telemedicine application using the Azure Communications Javascript SDK and some other Azure services on a react app [Contoso Med App](./contoso-web-app/) with a backend service [ACS Node](./contoso-node-api) built using Node.js and Express.js that helps the client-side application connect to Azure.
+
+## Application Architecture
+![Application Architecture](./docs/application-architecture.png)
 
 ## Features
+### Azure Communication Service specific features
+- SMS service on appointment booking.
+- Chat service
+    - Chat between Patient and QnA Bot.
+    - Add doctor to the patient - bot conversation
+    - Chat between Patient and Doctor.
+- Calling between Patient and Doctor.
 
-This project framework provides the following features:
+### General features
+- User authentication.
+- View doctors and book appointments.
+- Chat with QnA bot to book appointment or start a support consultation.
 
-* Feature 1
-* Feature 2
-* ...
+### Critical sequences
+#### Login
+&nbsp;
+![Login Sequence](./docs/sequence-diagrams/login.drawio.svg)
+&nbsp;
+#### Booking Appointment
+&nbsp;
+![Booking Appointment Sequence](./docs/sequence-diagrams/book-appointment.drawio.svg)
+&nbsp;
+#### Chatting and Calling via Azure Communication Service
+&nbsp;
+![Chat and Call Sequence](./docs/sequence-diagrams/conversation.drawio.svg)
+&nbsp;
+## Continue Reading
+- [Contoso Med Web App](./contoso-web-app/) - To set-up the client-side application
+- [Contoso Med API](./contoso-node-api) - To set-up the backend service
+- [QnA Maker Bridge](./contoso-az-functions) - To set-up a bridge between your QnA bot and Azure Communication Services using Azure Functions
 
-## Getting Started
-
-### Prerequisites
-
-(ideally very short, if any)
-
-- OS
-- Library version
-- ...
-
-### Installation
-
-(ideally very short)
-
-- npm install [package name]
-- mvn install
-- ...
-
-### Quickstart
-(Add steps to get up and running quickly)
-
-1. git clone [repository clone url]
-2. cd [respository name]
-3. ...
-
-
-## Demo
-
-A demo app is included to show how to use the project.
-
-To run the demo, follow these steps:
-
-(Add steps to start up the demo)
-
-1.
-2.
-3.
-
-## Resources
-
-(Any additional resources or related projects)
-
-- Link to supporting information
-- Link to similar sample
-- ...
+## Additional Reading
+- [What is Azure Communication Services?](https://docs.microsoft.com/en-us/azure/communication-services/overview#compare-azure-communication-services) - Know more about Azure Communication Services
+- [Azure Communication Service on GitHub](https://github.com/Azure/Communication) - See latest Samples, SDKs, Release Notes, Ask questions or file issues here
+- [React](https://reactjs.org/) - Library for building user interfaces
+- [Node.js](https://nodejs.org/) - Server-side scripting language
+- [Express.js](https://expressjs.com/) - Web application framework for NodeJS

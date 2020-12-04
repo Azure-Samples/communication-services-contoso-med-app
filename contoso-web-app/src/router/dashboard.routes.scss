@@ -1,0 +1,91 @@
+body {
+  --drawer-width: 5em;
+}
+
+.drawer {
+  width: var(--drawer-width);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  transition: width 200ms ease;
+  position: fixed;
+  z-index: 1;
+  background-color: white;
+  box-shadow: 4px 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  padding: 12px;
+  align-items: center;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.selected{
+  background-color:#f2f2f2;
+}
+
+.nav-items {
+  height: 80px;
+  display: flex;
+  padding: 16px;
+  margin: auto;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.nav-items:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.nav-items-title {
+  font-size: 20px;
+  display: none;
+  margin-top: 12px;
+  margin-left: 16px;
+  font-weight: normal;
+}
+
+.logo-drawer {
+  display: none;
+  height: 28px;
+  width: 130px;
+  margin: auto;
+}
+
+.nav-icon {
+  margin: 16px;
+}
+
+button {
+  border: 0px;
+  background-color: transparent;
+}
+
+.drawer:hover {
+  --drawer-width: 15em;
+  width: --drawer-width;
+}
+
+.drawer:hover .header {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.drawer:hover .logo-drawer {
+  display: inline-block;
+}
+
+.drawer:hover .nav-items-title {
+  display: inline-block;
+}
+
+.router-body {
+  width: 100%;
+}

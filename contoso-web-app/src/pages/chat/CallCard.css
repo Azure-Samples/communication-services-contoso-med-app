@@ -1,0 +1,13 @@
+.call-screen {
+    height: 100%;
+}
+
+.chat-section {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 35%;
+    height: 100%;
+    display: inline-block;
+    background: rgb(241, 240, 240);
+}

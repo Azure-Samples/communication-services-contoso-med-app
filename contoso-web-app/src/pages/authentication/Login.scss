@@ -1,0 +1,88 @@
+.login-page {
+    .gradient {
+        background-image: linear-gradient(to bottom right, #7bde9d, #52b7e1);
+        opacity: 0.90;
+        height: 100vh;
+        display: flex;
+    }
+    
+    .login-bgimage{
+        background-image: url('../../assets/images/login-page-bg.jpg');
+    }
+    
+    .center{
+        margin:auto;
+    }
+    
+    .loginform{
+        z-index: 10;
+        margin: auto;
+        width: 340px;
+    }
+    
+    label{
+        color:white;
+    }
+
+    h2 {
+        color: white;
+        margin-bottom: 2rem;
+    }
+
+    .login-btn {
+        background: #39A7B7;
+        width: 100%;
+    }
+
+    .forgot-pwd {
+        font-size: small;
+        color: white;
+    }
+
+    .loading-overlay{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* incase there is a display stack */
+        cursor: pointer;
+
+        display: flex;
+        gap: 1em;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .usertype-toggle-container {
+        margin: 2rem 0rem;
+
+        .toggle-switch {
+            border: 1px solid white;
+            padding: 2px;
+            color: white;
+
+            &:first-child {
+                border-radius: 0.8rem 0 0 0.8rem;
+            }
+
+            &:last-child {
+                border-radius: 0 0.8rem 0.8rem 0;
+            }
+
+            &.toggle-switch-active {
+                background: white;
+                color: #39A7B7;
+            }
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.8);
+                color: #39A7B7;
+            }
+        }
+    }
+}
