@@ -1,7 +1,5 @@
-const UserTokenClient = require("@azure/communication-configuration").UserTokenClient;
 const appointmentsService = require('../services/appointments.service');
 const config = require("../config.json");
-const configurationClient = new UserTokenClient(config.connectionString);
 
 if (!config || !config.connectionString || config.connectionString.indexOf('endpoint=') === -1) {
     throw new Error("Update `config.json` with connection string");

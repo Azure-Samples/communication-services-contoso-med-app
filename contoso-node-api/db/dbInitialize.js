@@ -27,13 +27,19 @@ const initializeDB = async () => {
         doctor.slots.push(...generateSlots())
     })
 
-    console.log('adding new doctors collection')
-    await db.collection("Doctors").insertMany(doctorUsers)
-    console.log('added doctors users')
+    try {
+        console.log('adding new doctors collection')
+        await db.collection("Doctors").insertMany(doctorUsers)
+        console.log('added doctors users')
 
-    console.log('adding new patients collection')
-    await db.collection("Patients").insertMany(patientUsers)
-    console.log('added patient users')
+        console.log('adding new patients collection')
+        await db.collection("Patients").insertMany(patientUsers)
+        console.log('added patient users')
+
+        console.log('Database initialization completed successfully.')
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 const SLOTS_PER_DAY = 5;
