@@ -1,6 +1,6 @@
 {
   "name": "acs-node-project",
-  "version": "1.0.0",  
+  "version": "1.0.0",
   "author": "Microsoft Corporation",
   "license": "MIT",
   "scripts": {
