@@ -32,7 +32,7 @@ This is a sample application showing how quickly and easily it is to add the Azu
 &nbsp;
 ![Chat and Call Sequence](./docs/sequence-diagrams/conversation.drawio.svg)
 &nbsp;
-## Continue Reading
+##  Set Up
 - [Contoso Med Web App](./contoso-web-app/) - To set-up the client-side application
 - [Contoso Med API](./contoso-node-api) - To set-up the backend service
 - [QnA Maker Bridge](./contoso-az-functions) - To set-up a bridge between your QnA bot and Azure Communication Services using Azure Functions
