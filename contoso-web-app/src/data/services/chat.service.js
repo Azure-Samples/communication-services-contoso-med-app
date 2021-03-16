@@ -3,7 +3,7 @@ import { api, success, error } from "./services.common";
 import { constants } from '../../config';
 
 import { ChatClient } from "@azure/communication-chat";
-import { AzureCommunicationUserCredential } from "@azure/communication-common";
+import { AzureCommunicationTokenCredential } from "@azure/communication-common";
 
 import { newMessageReceivedAction, newSupportThreadCreatedAction } from "../actions/chat.actions";
 
@@ -24,7 +24,7 @@ export const getChatClient = () => {
         let spoolID = localStorage.getItem(constants.KEY_SPOOL_ID)
         let spoolToken = localStorage.getItem(constants.KEY_SPOOL_TOKEN)
 
-        chatClient = new ChatClient(constants.acsEndpoint, new AzureCommunicationUserCredential(spoolToken))
+        chatClient = new ChatClient(constants.acsEndpoint, new AzureCommunicationTokenCredential(spoolToken))
         chatClient.startRealtimeNotifications()
             .then(() => {
                 chatClient.on("chatMessageReceived", async (e) => {
@@ -57,7 +57,6 @@ export const createThreadAPI = async (patientEmail, doctorEmail) => {
         currentThreadId = response.data.threadId
 
         appointmentThreads.push(response.data)
-
         let messages = await getAllMessages(currentThreadId)
         return success({ ...response.data, messages })
     }
@@ -87,18 +86,17 @@ export const createBotThreadAPI = async (patientEmail) => {
 }
 
 export const setActiveThread = (thread) => {
-    debugger;
     currentThreadId = thread.id
 }
 
-export const sendMessageAPI = async (threadId, messageText) => {
+export const sendMessageAPI = async (threadId, messageText, senderId) => {
     if (chatThreadClient === undefined || chatThreadClient.threadId !== threadId) {
         // reinitialize the thread client
         chatThreadClient = await getChatClient().getChatThreadClient(threadId)
     }
 
     let message = await chatThreadClient.sendMessage({ content: messageText }, { senderDisplayName: localStorage.getItem(constants.KEY_DISPLAY_NAME), priority: 'Normal' })
-    return success(message)
+    return success({ ...message, senderId, content: { message: messageText }})
 }
 
 export const getMessagesAPI = async (threadId) => {
@@ -118,7 +116,7 @@ const getAllMessages = async (threadId) => {
     let next = await messageIterator.next()
     while (!next.done) {
         let message = next.value
-        if (message !== undefined && message.type === 'Text') {
+        if (message !== undefined && message.type === 'text') {
             messages.push(message)
         }
         next = await messageIterator.next()

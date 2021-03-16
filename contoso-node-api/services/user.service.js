@@ -68,6 +68,8 @@ const updateSpoolID = async (spoolID, spoolToken, email) => {
     var newValues = { $set: { spoolID: spoolID, spoolToken: spoolToken }}
     var response = await db.collection("Patients").updateOne({ email: email }, newValues);
     console.log("user updated with spoolid and spool token...");
+    console.log('spoolID: ' + spoolID);
+    console.log('spoolToken: ' + spoolToken)
     return true
   }
   catch (e) {
