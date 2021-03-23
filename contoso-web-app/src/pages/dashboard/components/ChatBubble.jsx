@@ -54,7 +54,7 @@ const MessageDialog = ({ currentBotThreadInfo, sendMessage, messages, authInfo }
     const [currentMessage, setCurrentMessage] = useState('Loading... please wait...')
     const postMessage = async (text) => {
         if (currentBotThreadInfo === undefined) return
-        sendMessage(currentBotThreadInfo.threadId, text === undefined ? currentMessage : text)
+        sendMessage(currentBotThreadInfo.threadId, text === undefined ? currentMessage : text, authInfo.spoolID)
         setCurrentMessage('')
     }
 

@@ -8,41 +8,19 @@ export default class LocalVideoPreviewCard extends React.Component {
     constructor(props) {
         super(props);
         this.deviceManager = props.deviceManager;
-        this.cameraDevice = props.cameraDevice;
-        this.callClient = props.callClient;
-        this.renderer = null;
+        this.selectedCameraDeviceId = props.selectedCameraDeviceId;
     }
 
     async componentDidMount() {
-        let cameraDevice = this.deviceManager.getCameraList()[0];
-        const target = document.getElementById('localVideoRenderer');
-        try {
-            const localVideoStream = new LocalVideoStream(cameraDevice);
-            this.renderer = new Renderer(localVideoStream);
-            const view = await this.renderer.createView();
-            document.getElementById('localVideoRenderer').appendChild(view.target);
-        } catch (err) {
-            if (this.deviceManager.getCameraList().length > 1) {
-                cameraDevice = this.deviceManager.getCameraList()[1];
-                const localVideoStream = new LocalVideoStream(cameraDevice);
-                this.renderer = new Renderer(localVideoStream);
-                const view = await this.renderer.createView();
-                document.getElementById('localVideoRenderer').appendChild(view.target);
-                this.props.handleCameraInUse('cameraChanged');
-            } else {
-                alert("Camera device already in use by another process");
-                this.props.handleCameraInUse('videoOff');
-            }
-        }
-    }
-
-    componentWillUnmount() {
-        try {
-            this.renderer.dispose();
-        }
-        catch (e) {
-            console.log(e);
-        }
+        const cameras = await this.deviceManager.getCameras();
+        this.cameraDeviceInfo = cameras.find(cameraDevice => {
+            return cameraDevice.id === this.selectedCameraDeviceId;
+        });
+        const localVideoStream = new LocalVideoStream(this.cameraDeviceInfo);
+        const renderer = new Renderer(localVideoStream);
+        this.view = await renderer.createView();
+        const targetContainer = document.getElementById('localVideoRenderer');
+        targetContainer.appendChild(this.view.target);
     }
 
     render() {

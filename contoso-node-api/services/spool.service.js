@@ -17,13 +17,14 @@ const getSpoolID = async (userEmail, userType) => {
             tokenResponse = await identityClient.issueToken(userResponse, ["voip", "chat"]);
             
             if (userType === 'Doctor') 
-                await userService.updateSpoolIDForDoctor(tokenResponse.user.communicationUserId, tokenResponse.token, userEmail)
+                await userService.updateSpoolIDForDoctor(tokenResponse.id.communicationUserId, tokenResponse.token, userEmail)
             else
-                await userService.updateSpoolID(tokenResponse.user.communicationUserId, tokenResponse.token, userEmail)
+                await userService.updateSpoolID(tokenResponse.id.communicationUserId, tokenResponse.token, userEmail)
 
-            return tokenResponse.user.communicationUserId
+            return tokenResponse.id.communicationUserId
         }
         catch (e) {
+            console.log('Error while generating token for user.');
             console.log(e)
             return undefined;
         }

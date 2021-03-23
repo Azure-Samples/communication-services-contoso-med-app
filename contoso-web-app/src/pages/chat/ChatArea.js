@@ -14,10 +14,10 @@ const ChatArea = ({ authInfo, selectedDoctor, selectedPatient, createThread, sen
     const chatBubbles = (messages.length > 0) ? messages.map(message => {
         return (<tr className="chat-bubble" key={message.messageId}>
             <td>
-                <div className={message.sender.communicationUserId === authInfo.spoolID ? "sender-chat-bubble" : "receiver-chat-bubble"}>
+            <div className={message.sender.communicationUserId === authInfo.spoolID ? "sender-chat-bubble" : "receiver-chat-bubble"}>
                     <div className="message-user-name">{message.sender.communicationUserId === authInfo.spoolID ? "You" : message.senderDisplayName}</div>
                     <div className={message.sender.communicationUserId === authInfo.spoolID ? "sender-chat-bubble-box" : "receiver-chat-bubble-box"}>
-                        <div className="message-content">{message.content}</div>
+                        <div className="message-content">{message.content.message}</div>
                         <div className="message-date-time">{new Date(message.createdOn).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</div>
                     </div>
                 </div>
@@ -27,7 +27,10 @@ const ChatArea = ({ authInfo, selectedDoctor, selectedPatient, createThread, sen
 
     const footerInterface = (
         <div className="chat-area-footer">
-            <form className="chat-area-footer-sub-section ml-3" onSubmit={(e) => { e.preventDefault(); sendMessage(currentThreadInfo.threadId, message); setMessage('') }}>
+            <form className="chat-area-footer-sub-section ml-3" onSubmit={(e) => { 
+                e.preventDefault();
+                sendMessage(currentThreadInfo.threadId, message, authInfo.spoolID); 
+                setMessage('') }}>
                 <input type="text" className="chat-area-message-textbox mt-2 ml-2" value={message} placeholder="Type your message here..." onChange={(e) => { setMessage(e.target.value) }} />
                 <button type='submit' className="chat-area-message-send-btn ml-1">
                     <i className="far fa-paper-plane"></i>

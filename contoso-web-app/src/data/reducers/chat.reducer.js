@@ -23,7 +23,20 @@ import {
         case SEND_MESSAGE_SUCCESS:
             return { ...state, ...action.payload, loading: false }
         case NEW_MESSAGE_RECEIVED:
-            return { ...state, messages: [ ...state.messages, action.payload.newMessage] }
+            return { 
+                ...state, 
+                messages: [ 
+                    ...state.messages, 
+                    { 
+                        sender: { 
+                            communicationUserId: action.payload.newMessage.sender.user.communicationUserId 
+                        }, 
+                        senderDisplayName: action.payload.newMessage.sender.displayName, 
+                        content: { message: action.payload.newMessage.content }, 
+                        createdOn: action.payload.newMessage.createdOn 
+                    }
+                ]
+            }
         case NEW_SUPPORT_THREAD_CREATED:
             return { ...state, supportThreads: [ ...state.supportThreads, action.payload.supportThreadInfo ] }
         case OPERATION_FAILED:

@@ -1,5 +1,5 @@
 const ChatClient = require("@azure/communication-chat").ChatClient;
-const CommunicationUserCredential = require("@azure/communication-common").AzureCommunicationUserCredential;
+const CommunicationUserCredential = require("@azure/communication-common").AzureCommunicationTokenCredential;
 const axios = require("axios");
 const config = require("../config.json");
 const userService = require("./user.service");
@@ -23,14 +23,15 @@ const createThread = async (patientUser, threadName, doctorUser) => {
       // check if thread exists
       let thread = threads.find(
         (thread) =>
-          thread.members.find((member) => member.user.communicationUserId === sender.spoolID) !=
+          thread.participants.find((member) => member.id.communicationUserId === sender.spoolID) !=
           undefined &&
-          thread.members.find((member) => member.user.communicationUserId === receiver.spoolID) !=
+          thread.participants.find((member) => member.id.communicationUserId === receiver.spoolID) !=
           undefined
       );
 
       if (thread != undefined) {
         console.log("thread already exists...");
+        console.log(thread);
         return thread;
       }
     }
@@ -40,15 +41,15 @@ const createThread = async (patientUser, threadName, doctorUser) => {
       topic: threadName,
       isStickyThread: false,
 
-      members: [
+      participants: [
         {
-          user: {
+          id: {
             communicationUserId: await spoolService.getSpoolID(patientUser, 'Patient')
           },
           displayName: sender.name
         },
         {
-          user: {
+          id: {
             communicationUserId: await spoolService.getSpoolID(doctorUser, 'Doctor')
           },
           displayName: receiver.name
@@ -59,14 +60,18 @@ const createThread = async (patientUser, threadName, doctorUser) => {
 
     // actual call to create the thread
     console.log("initializing chat client...");
+    console.log(sender.spoolToken);
     let chatClient = new ChatClient(endpointUrl, new CommunicationUserCredential(sender.spoolToken));
 
     console.log("creating thread...");
     try {
+      console.log("here abctc")
       let chatThread = await chatClient.createChatThread(threadOptions);
-      threadOptions.threadId = chatThread.threadId;
+      console.log('chat thread created: ');
+      console.log(chatThread);
+      threadOptions.threadId = chatThread.chatThread.id;
       await db.collection("Threads").insertOne(threadOptions);
-      return chatThread;
+      return threadOptions;
     } catch (e) {
       console.log(e);
       return undefined;

@@ -1,5 +1,5 @@
 const { ChatClient } = require("@azure/communication-chat");
-const { AzureCommunicationUserCredential } = require("@azure/communication-common");
+const { AzureCommunicationTokenCredential } = require("@azure/communication-common");
 const { CommunicationIdentityClient } = require('@azure/communication-administration')
 const W3CWebSocket = require('websocket').w3cwebsocket
 const config = require('../config.json')
@@ -53,7 +53,7 @@ const createBotThread = async (patientUser) => {
     // if (botThreads !== undefined && botThreads.length > 0) {
     //     // check if thread exists
     //     let thread = botThreads.find(
-    //         (thread) => thread.members.find(member => member.user.communicationUserId === patient.spoolID) !== undefined
+    //         (thread) => thread.members.find(member => member.id.communicationUserId === patient.spoolID) !== undefined
     //     )
 
     //     if (thread !== undefined) {
@@ -65,9 +65,9 @@ const createBotThread = async (patientUser) => {
 
     let threadOptions = {
         topic: `Support Conversation with ${patient.name}`,
-        members: [
+        participants: [
             {
-                user: { communicationUserId: botSpoolIdentity.user.communicationUserId },
+                user: { communicationUserId: botSpoolIdentity.id.communicationUserId },
                 displayName: 'Bot'
             },
             {
@@ -77,13 +77,13 @@ const createBotThread = async (patientUser) => {
         ]
     }
 
-    let chatClient = new ChatClient(config.endpoint, new AzureCommunicationUserCredential(botSpoolIdentity.token))
+    let chatClient = new ChatClient(config.endpoint, new AzureCommunicationTokenCredential(botSpoolIdentity.token))
     let thread = await chatClient.createChatThread(threadOptions)
 
-    threadOptions.threadId = thread.threadId
+    threadOptions.threadId = thread.chatThread.id
     await db.collection("BotThreads").insertOne(threadOptions)
 
-    return thread
+    return threadOptions
 }
 
 /**

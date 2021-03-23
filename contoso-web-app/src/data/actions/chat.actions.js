@@ -33,10 +33,10 @@ export const selectActiveBotThread = (threadInfo) => {
     }
 }
 
-export const sendMessage = (threadId, messageText, spoolToken) => {
+export const sendMessage = (threadId, messageText, spoolID) => {
     return async (dispatch) => {
         dispatch(operationInProgressAction())
-        let response = await sendMessageAPI(threadId, messageText, spoolToken)
+        let response = await sendMessageAPI(threadId, messageText, spoolID)
         if (response.isSuccessful) dispatch(sendMessageSuccessAction(response.data))
         else dispatch (operationFailedAction(response.message))
     }

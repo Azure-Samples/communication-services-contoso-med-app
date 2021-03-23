@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
 import SupportCard from "./SupportCard";
 import ChatArea from "./ChatArea";
-import CallCard from './CallCard';
+import CallCard from "./CallCard";
 
-import { AzureCommunicationUserCredential } from '@azure/communication-common';
-import { CallClient, LocalVideoStream } from '@azure/communication-calling';
+import { AzureCommunicationTokenCredential } from "@azure/communication-common";
+import { CallClient, LocalVideoStream } from "@azure/communication-calling";
 
 import { connect } from "react-redux";
 import { getChatClient } from "../../data/services/chat.service";
@@ -15,95 +15,169 @@ import { selectActiveBotThread } from "../../data/actions/chat.actions";
 import AppBar from "../../shared/components/appbar/appbar";
 import "./App.css";
 import BotChatArea from "./BotChatArea";
+import IncomingCallCard from "./IncomingCallCard";
 
-const ChatDashboard = ({ authInfo, appointmentsList, getActiveAppointments, selectActiveBotThread, supportThreads }) => {
+const ChatDashboard = ({
+  authInfo,
+  appointmentsList,
+  getActiveAppointments,
+  selectActiveBotThread,
+  supportThreads,
+}) => {
   useEffect(() => {
     if (appointmentsList == undefined) getActiveAppointments();
-  })
+  });
 
-  const [selectedDoctor, setSelectedDoctor] = useState(undefined)
-  const [selectedPatient, setSelectedPatient] = useState(undefined)
-  const [selectedConversationType, setSelectedConversationType] = useState('Appointments')
+  const [selectedDoctor, setSelectedDoctor] = useState(undefined);
+  const [selectedPatient, setSelectedPatient] = useState(undefined);
+  const [selectedConversationType, setSelectedConversationType] = useState(
+    "Appointments"
+  );
 
-  const [call, setCall] = useState(null)
-  const [callAgent, setCallAgent] = useState(null)
-  const [chatClient, setChatClient] = useState(null)
-  const [cameraDeviceId, setCameraDevceId] = useState(null)
-  const [speakerDeviceId, setSpeakerDeviceId] = useState(null)
-  const [microphoneDeviceId, setMicrophoneDeviceId] = useState(null)
-  const [deviceManager, setDeviceManager] = useState(null)
+  const [call, setCall] = useState(null);
+  const [incomingCall, setIncomingCall] = useState(null);
+  const [callAgent, setCallAgent] = useState(null);
+  const [chatClient, setChatClient] = useState(null);
+  const [cameraDeviceId, setCameraDevceId] = useState(null);
+  const [speakerDeviceId, setSpeakerDeviceId] = useState(null);
+  const [microphoneDeviceId, setMicrophoneDeviceId] = useState(null);
+  const [deviceManager, setDeviceManager] = useState(null);
+  const [cameraDeviceOptions, setCameraDeviceOptions] = useState(null);
+  const [speakerDeviceOptions, setSpeakerDeviceOptions] = useState(null);
+  const [microphoneDeviceOptions, setMicrophoneDeviceOptions] = useState(null);
 
   const initCallClient = async () => {
-    const tokenCredential = new AzureCommunicationUserCredential(authInfo.spoolToken);
-
     try {
-      // initialize call client
-      var callClient = new CallClient();
-      // create call agent
-      var clAgent = await callClient.createCallAgent(tokenCredential);
-      let devcManager = await callClient.getDeviceManager();
-      setDeviceManager(devcManager);
-      clAgent.on('callsUpdated', e => {
-        console.log("Call init");
-        console.log(e);
+      const tokenCredential = new AzureCommunicationTokenCredential(
+        authInfo.spoolToken
+      );
+      const callClient = new CallClient();
+      const callAgent = await callClient.createCallAgent(tokenCredential);
+      window.callAgent = callAgent;
+      const deviceManager = await callClient.getDeviceManager();
+      await deviceManager.askDevicePermission({
+        audio: true,
+        video: true,
+      });
+      callAgent.on("callsUpdated", (e) => {
+        console.log(`callsUpdated, added=${e.added}, removed=${e.removed}`);
 
-        e.added.forEach(call => {
-          console.log(typeof call)
-          if (typeof call !== "undefined") {
-            if (call && call.state.isIncoming) {
-              call.reject();
-              return;
-            }
-          }
-          setCall(call)
+        e.added.forEach((call) => {
+          setCall(call);
         });
 
-        e.removed.forEach(call => {
+        e.removed.forEach((call) => {
           if (call && call === call) {
+            console.log(call.callEndReason);
             setCall(null);
           }
         });
       });
 
-      setCallAgent(clAgent)
-    }
-    catch (e) {
-      console.log('call client initialization failed... refreshing page...')
-      console.log(e)
+      callAgent.on("incomingCall", (args) => {
+        const incomingCall = args.incomingCall;
+        if (call) {
+          incomingCall.reject();
+          setIncomingCall(null);
+          return;
+        }
+
+        setIncomingCall(incomingCall);
+
+        incomingCall.on("callEnded", (args) => {
+          setIncomingCall(null);
+          console.log(args.callEndReason);
+        });
+      });
+
+      setDeviceManager(deviceManager);
+      setCallAgent(callAgent);
+    } catch (e) {
+      console.log("call client initialization failed... refreshing page...");
+      console.log(e);
       // failure might be because of pre-existing call client object
       // refresh the page
-      
+
       //window.location.reload()
     }
-  }
+  };
 
-  const getPlaceCallOptions = () => {
+  const getCallOptions = async () => {
     let callOptions = {
       videoOptions: {
-        localVideoStreams: undefined
+        localVideoStreams: undefined,
       },
       audioOptions: {
-        muted: false
-      }
+        muted: false,
+      },
     };
 
-    const cameraDevice = deviceManager.getCameraList()[0];
-    if (!cameraDevice || cameraDevice.id === 'camera:') {
-      console.error("No camera found");
-    } else if (cameraDevice) {
-      setCameraDevceId(cameraDevice.id);
-      const localVideoStream = new LocalVideoStream(cameraDevice);
-      callOptions.videoOptions = { localVideoStreams: [localVideoStream] };
+    try {
+      const cameras = await deviceManager.getCameras();
+      const cameraDevice = cameras[0];
+      if (!cameraDevice || cameraDevice.id === "camera:") {
+        throw new Error("No camera devices found.");
+      } else if (cameraDevice) {
+        setCameraDevceId(cameraDevice.id);
+        setCameraDeviceOptions(
+          cameras.map((camera) => {
+            return { key: camera.id, text: camera.name };
+          })
+        );
+        const localVideoStream = new LocalVideoStream(cameraDevice);
+        callOptions.videoOptions = { localVideoStreams: [localVideoStream] };
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const speakers = await deviceManager.getSpeakers();
+      const speakerDevice = speakers[0];
+      if (!speakerDevice || speakerDevice.id === "speaker:") {
+        throw new Error("No speaker devices found.");
+      } else if (speakerDevice) {
+        setSpeakerDeviceId(speakerDevice.id);
+        setSpeakerDeviceOptions(
+          speakers.map((speaker) => {
+            return { key: speaker.id, text: speaker.name };
+          })
+        );
+        await deviceManager.selectSpeaker(speakerDevice);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const microphones = await deviceManager.getMicrophones();
+      const microphoneDevice = microphones[0];
+      if (!microphoneDevice || microphoneDevice.id === "microphone:") {
+        throw new Error("No microphone devices found.");
+      } else {
+        setMicrophoneDeviceId(microphoneDevice.id);
+        setMicrophoneDeviceOptions(
+          microphones.map((microphone) => {
+            return { key: microphone.id, text: microphone.name };
+          })
+        );
+        await deviceManager.selectMicrophone(microphoneDevice);
+      }
+    } catch (e) {
+      console.log(e);
     }
 
     return callOptions;
-  }
+  };
 
   const placeCall = async (selectedUser) => {
     try {
-      callAgent.call([{communicationUserId: selectedUser.spoolID}], getPlaceCallOptions());
+      callAgent.startCall(
+        [{ communicationUserId: selectedUser.spoolID }],
+        await getCallOptions()
+      );
     } catch (e) {
-      console.log('Failed to place a call', e);
+      console.log("Failed to place a call", e);
     }
   };
 
@@ -113,73 +187,149 @@ const ChatDashboard = ({ authInfo, appointmentsList, getActiveAppointments, sele
     }
 
     if (chatClient === null) {
-      setChatClient(getChatClient())
+      setChatClient(getChatClient());
     }
 
     return () => {
       if (callAgent !== null) {
         try {
-          console.log('trying to dispose off call client')
+          console.log("trying to dispose off call client");
           callAgent.dispose();
-        }
-        catch (e) {
-          console.log('error disposing call client')
+        } catch (e) {
+          console.log("error disposing call client");
           console.log(e);
         }
       }
-    }
-  }, [authInfo.spoolID])
+    };
+  }, [authInfo.spoolID]);
 
   return (
     <>
-      <AppBar title={authInfo.userType == 'Doctor' ? 'My Patients' : 'My Doctors'} />
-      {call ?
-        (
-          <CallCard call={call}
-            deviceManager={deviceManager}
-            callClient={callAgent}
-            selectedCameraDeviceId={cameraDeviceId}
-            selectedSpeakerDeviceId={speakerDeviceId}
-            selectedMicrophoneDeviceId={microphoneDeviceId}
-            selectedDoctor={selectedDoctor} selectedPatient={selectedPatient} />
-        ) :
-        (
-          <div className="chat-screen">
-            <div className="chat-user-list">
-              <div className="chat-user-list-header p-4">{authInfo.userType == 'Doctor' ? 'Patient' : 'Doctor'} List</div>
-              <div className="chat-users">
-                {authInfo.userType == 'Patient' ? (appointmentsList != undefined && appointmentsList.length != 0) ? (
-                  getDoctorsFromAppointments(appointmentsList).map(doctorEntry => {
-                    return (<UserCard key={doctorEntry.doctor.id} docInfo={doctorEntry.doctor} onClick={() => { setSelectedDoctor(doctorEntry.doctor) }} isSelected={selectedDoctor?.id == doctorEntry.doctor.id} />)
-                  })
-                ) : (
-                    <div className="text-center m-5">{authInfo.userType == 'Patient' ? 'Book an appointment get access to doctors' : 'No active patients'}</div>
-                  ) : (appointmentsList != undefined && appointmentsList.length != 0) ? (
-                    getPatientsFromAppointments(appointmentsList).map(userEntry => {
-                      return (<UserCard key={userEntry.user.id} userInfo={userEntry.user} onClick={() => { setSelectedPatient(userEntry.user); setSelectedConversationType('Appointments'); }} isSelected={(selectedPatient?.id == userEntry.user.id) && (selectedConversationType == 'Appointments')} />)
-                    })
-                  ) : (
-                      <div className="text-center m-5">{authInfo.userType == 'Patient' ? 'Book an appointment get access to doctors' : 'No active patients'}</div>
-                    )}
-              </div>
-
-              <div className="chat-user-list-header p-4" style={{ display: authInfo.userType === 'Doctor' && supportThreads.length > 0 ? 'block' : 'none' }}>Support Conversations</div>
-              <div className="chat-users">
-                {supportThreads.map(thread => (
-                  <SupportCard key={thread.threadId} threadInfo={thread} onClick={() => { selectActiveBotThread(thread); setSelectedConversationType('Support'); }} isSelected={selectedConversationType !== 'Appointments'} />
-                ))}
-              </div>
-
+      <AppBar
+        title={authInfo.userType == "Doctor" ? "My Patients" : "My Doctors"}
+      />
+      {call && call.callState !== "Disconnected" ? (
+        <CallCard
+          call={call}
+          deviceManager={deviceManager}
+          cameraDeviceOptions={cameraDeviceOptions}
+          speakerDeviceOptions={speakerDeviceOptions}
+          microphoneDeviceOptions={microphoneDeviceOptions}
+          selectedDoctor={selectedDoctor}
+          selectedPatient={selectedPatient}
+        />
+      ) : incomingCall && !call ? (
+        <IncomingCallCard
+          incomingCall={incomingCall}
+          acceptCallOptions={async () => await getCallOptions()}
+          onReject={() => {
+            setIncomingCall(undefined);
+          }}
+          selectedDoctor={selectedDoctor}
+          selectedPatient={selectedPatient}
+        />
+      ) : (
+        <div className="chat-screen">
+          <div className="chat-user-list">
+            <div className="chat-user-list-header p-4">
+              {authInfo.userType == "Doctor" ? "Patient" : "Doctor"} List
             </div>
-            <div className="chat-area">
-              {
-                selectedConversationType === 'Appointments' 
-                ? <ChatArea selectedDoctor={selectedDoctor} selectedPatient={selectedPatient} onCallPlaced={(selectedUser) => { placeCall(selectedUser); }} />
-                : <BotChatArea />
-              }
+            <div className="chat-users">
+              {authInfo.userType == "Patient" ? (
+                appointmentsList != undefined &&
+                appointmentsList.length != 0 ? (
+                  getDoctorsFromAppointments(appointmentsList).map(
+                    (doctorEntry) => {
+                      return (
+                        <UserCard
+                          key={doctorEntry.doctor.id}
+                          docInfo={doctorEntry.doctor}
+                          onClick={() => {
+                            setSelectedDoctor(doctorEntry.doctor);
+                          }}
+                          isSelected={
+                            selectedDoctor?.id == doctorEntry.doctor.id
+                          }
+                        />
+                      );
+                    }
+                  )
+                ) : (
+                  <div className="text-center m-5">
+                    {authInfo.userType == "Patient"
+                      ? "Book an appointment get access to doctors"
+                      : "No active patients"}
+                  </div>
+                )
+              ) : appointmentsList != undefined &&
+                appointmentsList.length != 0 ? (
+                getPatientsFromAppointments(appointmentsList).map(
+                  (userEntry) => {
+                    return (
+                      <UserCard
+                        key={userEntry.user.id}
+                        userInfo={userEntry.user}
+                        onClick={() => {
+                          setSelectedPatient(userEntry.user);
+                          setSelectedConversationType("Appointments");
+                        }}
+                        isSelected={
+                          selectedPatient?.id == userEntry.user.id &&
+                          selectedConversationType == "Appointments"
+                        }
+                      />
+                    );
+                  }
+                )
+              ) : (
+                <div className="text-center m-5">
+                  {authInfo.userType == "Patient"
+                    ? "Book an appointment get access to doctors"
+                    : "No active patients"}
+                </div>
+              )}
+            </div>
+
+            <div
+              className="chat-user-list-header p-4"
+              style={{
+                display:
+                  authInfo.userType === "Doctor" && supportThreads.length > 0
+                    ? "block"
+                    : "none",
+              }}
+            >
+              Support Conversations
+            </div>
+            <div className="chat-users">
+              {supportThreads.map((thread) => (
+                <SupportCard
+                  key={thread.threadId}
+                  threadInfo={thread}
+                  onClick={() => {
+                    selectActiveBotThread(thread);
+                    setSelectedConversationType("Support");
+                  }}
+                  isSelected={selectedConversationType !== "Appointments"}
+                />
+              ))}
             </div>
           </div>
-        )}
+          <div className="chat-area">
+            {selectedConversationType === "Appointments" ? (
+              <ChatArea
+                selectedDoctor={selectedDoctor}
+                selectedPatient={selectedPatient}
+                onCallPlaced={(selectedUser) => {
+                  placeCall(selectedUser);
+                }}
+              />
+            ) : (
+              <BotChatArea />
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 };
@@ -199,11 +349,11 @@ const getDoctorsFromAppointments = (appointmentsList) => {
   const doctorsArray = Object.keys(groupedAppointments).map((docId) => {
     return {
       doctor: groupedAppointments[docId][0].docInfo,
-      appointments: groupedAppointments[docId]
+      appointments: groupedAppointments[docId],
     };
   });
   return doctorsArray;
-}
+};
 
 const getPatientsFromAppointments = (appointmentsList) => {
   // this gives an object with dates as keys
@@ -220,21 +370,21 @@ const getPatientsFromAppointments = (appointmentsList) => {
   const patientsArray = Object.keys(groupedAppointments).map((patientId) => {
     return {
       user: groupedAppointments[patientId][0].user,
-      appointments: groupedAppointments[patientId]
+      appointments: groupedAppointments[patientId],
     };
   });
   return patientsArray;
-}
+};
 
 const mapStateToProps = (globalState) => ({
   authInfo: globalState.auth,
   appointmentsList: globalState.appointments.appointmentsList,
-  supportThreads: globalState.chat.supportThreads
-})
+  supportThreads: globalState.chat.supportThreads,
+});
 
 const mapDispatchToProps = {
   getActiveAppointments,
-  selectActiveBotThread
-}
+  selectActiveBotThread,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatDashboard);
