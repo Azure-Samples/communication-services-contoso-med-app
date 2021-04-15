@@ -37,10 +37,13 @@ const createThread = async (patientUser, threadName, doctorUser) => {
     }
 
     console.log("creating new thread...");
-    let threadOptions = {
-      topic: threadName,
-      isStickyThread: false,
+    let threadRequest = {
+      topic: threadName
+    };
 
+    let threadOptions = {
+      // topic: threadName,
+      // isStickyThread: false,
       participants: [
         {
           id: {
@@ -66,7 +69,7 @@ const createThread = async (patientUser, threadName, doctorUser) => {
     console.log("creating thread...");
     try {
       console.log("here abctc")
-      let chatThread = await chatClient.createChatThread(threadOptions);
+      let chatThread = await chatClient.createChatThread(threadRequest, threadOptions);
       console.log('chat thread created: ');
       console.log(chatThread);
       threadOptions.threadId = chatThread.chatThread.id;

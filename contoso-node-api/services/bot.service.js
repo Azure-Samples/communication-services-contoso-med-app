@@ -1,6 +1,6 @@
 const { ChatClient } = require("@azure/communication-chat");
 const { AzureCommunicationTokenCredential } = require("@azure/communication-common");
-const { CommunicationIdentityClient } = require('@azure/communication-administration')
+const { CommunicationIdentityClient } = require('@azure/communication-identity')
 const W3CWebSocket = require('websocket').w3cwebsocket
 const config = require('../config.json')
 const axios = require("axios").default
@@ -33,7 +33,7 @@ const getBotSpoolID = async () => {
             await db.collection("Bots").insertOne(bot)
         }
 
-        botSpoolIdentity = await identityClient.issueToken({ communicationUserId: bot.communicationUserId }, ["voip", "chat"]);
+        botSpoolIdentity = await identityClient.getToken({ communicationUserId: bot.communicationUserId }, ["voip", "chat"]);
     }
     return botSpoolIdentity
 }

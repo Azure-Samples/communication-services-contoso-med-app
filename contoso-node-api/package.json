@@ -7,13 +7,13 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "@azure/communication-administration": "",
     "@azure/communication-chat": "",
     "@azure/communication-common": "",
+    "@azure/communication-identity": "^1.0.0",
     "@azure/communication-signaling": "",
     "@azure/communication-sms": "",
     "@azure/event-hubs": "^5.3.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
