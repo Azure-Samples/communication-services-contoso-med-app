@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { Card } from 'react-bootstrap';
-import { LocalVideoStream, Renderer } from '@azure/communication-calling';
+import { LocalVideoStream, VideoStreamRenderer } from '@azure/communication-calling';
 
 export default class LocalVideoPreviewCard extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ export default class LocalVideoPreviewCard extends React.Component {
             return cameraDevice.id === this.selectedCameraDeviceId;
         });
         const localVideoStream = new LocalVideoStream(this.cameraDeviceInfo);
-        const renderer = new Renderer(localVideoStream);
+        const renderer = new VideoStreamRenderer(localVideoStream);
         this.view = await renderer.createView();
         const targetContainer = document.getElementById('localVideoRenderer');
         targetContainer.appendChild(this.view.target);

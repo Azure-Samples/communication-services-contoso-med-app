@@ -239,10 +239,10 @@ const ChatDashboard = ({
                 appointmentsList != undefined &&
                 appointmentsList.length != 0 ? (
                   getDoctorsFromAppointments(appointmentsList).map(
-                    (doctorEntry) => {
+                    (doctorEntry, index) => {
                       return (
                         <UserCard
-                          key={doctorEntry.doctor.id}
+                          key={index}
                           docInfo={doctorEntry.doctor}
                           onClick={() => {
                             setSelectedDoctor(doctorEntry.doctor);
@@ -264,10 +264,10 @@ const ChatDashboard = ({
               ) : appointmentsList != undefined &&
                 appointmentsList.length != 0 ? (
                 getPatientsFromAppointments(appointmentsList).map(
-                  (userEntry) => {
+                  (userEntry, index) => {
                     return (
                       <UserCard
-                        key={userEntry.user.id}
+                        key={index}
                         userInfo={userEntry.user}
                         onClick={() => {
                           setSelectedPatient(userEntry.user);
@@ -358,7 +358,7 @@ const getDoctorsFromAppointments = (appointmentsList) => {
 const getPatientsFromAppointments = (appointmentsList) => {
   // this gives an object with dates as keys
   const groupedAppointments = appointmentsList.reduce((groups, appointment) => {
-    const patientId = appointment.user.id;
+    const patientId = appointment.user.email;
     if (!groups[patientId]) {
       groups[patientId] = [];
     }

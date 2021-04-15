@@ -182,11 +182,11 @@ class CallSection extends Component {
         this.setState({ callId: this.call.id });
       });
 
-      this.call.on("isRecordingActiveChanged", () => {
-        console.log("isRecordingActiveChanged ", this.call.isRecordingActive);
-      });
+      // this.call.on("isRecordingActiveChanged", () => {
+      //   console.log("isRecordingActiveChanged ", this.call.isRecordingActive);
+      // });
 
-      this.call.on("isMicrophoneMutedChanged", () => {
+      this.call.on("isMutedChanged", () => {
         this.setState({ micMuted: this.call.isMicrophoneMuted });
       });
 
