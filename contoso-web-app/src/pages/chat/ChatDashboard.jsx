@@ -75,6 +75,7 @@ const ChatDashboard = ({
       });
 
       callAgent.on("incomingCall", (args) => {
+        // console.log('incoming call...')
         const incomingCall = args.incomingCall;
         if (call) {
           incomingCall.reject();
@@ -171,6 +172,7 @@ const ChatDashboard = ({
   };
 
   const placeCall = async (selectedUser) => {
+    // console.log('place call', selectedUser);
     try {
       callAgent.startCall(
         [{ communicationUserId: selectedUser.spoolID }],

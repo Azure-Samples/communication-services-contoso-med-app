@@ -30,13 +30,13 @@ const createThread = async (patientUser, threadName, doctorUser) => {
       );
 
       if (thread != undefined) {
-        console.log("thread already exists...");
-        console.log(thread);
+        //console.log("thread already exists...");
+        //console.log(thread);
         return thread;
       }
     }
 
-    console.log("creating new thread...");
+    //console.log("creating new thread...");
     let threadRequest = {
       topic: threadName
     };
@@ -62,16 +62,16 @@ const createThread = async (patientUser, threadName, doctorUser) => {
     let endpointUrl = config.endpoint;
 
     // actual call to create the thread
-    console.log("initializing chat client...");
-    console.log(sender.spoolToken);
+    // console.log("initializing chat client...");
+    // console.log(sender.spoolToken);
     let chatClient = new ChatClient(endpointUrl, new CommunicationUserCredential(sender.spoolToken));
 
-    console.log("creating thread...");
+    // console.log("creating thread...");
     try {
       console.log("here abctc")
       let chatThread = await chatClient.createChatThread(threadRequest, threadOptions);
-      console.log('chat thread created: ');
-      console.log(chatThread);
+      //console.log('chat thread created: ');
+      //console.log(chatThread);
       threadOptions.threadId = chatThread.chatThread.id;
       await db.collection("Threads").insertOne(threadOptions);
       return threadOptions;

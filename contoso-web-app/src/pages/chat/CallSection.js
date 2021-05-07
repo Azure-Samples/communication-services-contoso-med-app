@@ -388,6 +388,7 @@ class CallSection extends Component {
   }
 
   cameraDeviceSelectionChanged = async (event, item) => {
+    // console.log('camera device state changed');
     const cameras = await this.deviceManager.getCameras();
     const cameraDeviceInfo = cameras.find((cameraDeviceInfo) => {
       return cameraDeviceInfo.id === item.key;

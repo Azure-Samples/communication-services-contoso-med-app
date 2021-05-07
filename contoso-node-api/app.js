@@ -2,7 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var cors = require('cors');
 var path = require('path');
-var bodyParser = require('body-parser');
+// var bodyParser = require('body-parser');
 var logger = require('morgan');
 
 var dbClient = require('./db/index')
@@ -15,7 +15,7 @@ dbClient.connect()
 
     /* uncomment next line to reset database when application
      * starts. Appointments in db are flushed and regenerated */
-    dbInitializationService.initializeDB();
+    // dbInitializationService.initializeDB();
   })
   .catch((e) => {
     console.log(e)
@@ -35,7 +35,7 @@ var app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(express.static('public'))
 
 // view engine setup
