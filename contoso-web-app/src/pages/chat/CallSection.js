@@ -185,9 +185,8 @@ class CallSection extends Component {
       // this.call.on("isRecordingActiveChanged", () => {
       //   console.log("isRecordingActiveChanged ", this.call.isRecordingActive);
       // });
-
       this.call.on("isMutedChanged", () => {
-        this.setState({ micMuted: this.call.isMicrophoneMuted });
+        this.setState({ micMuted: this.call.isMuted });
       });
 
       this.call.on("isScreenSharingOnChanged", () => {
@@ -351,12 +350,12 @@ class CallSection extends Component {
 
   async handleMicOnOff() {
     try {
-      if (!this.call.isMicrophoneMuted) {
+      if (!this.call.isMuted) {
         await this.call.mute();
       } else {
         await this.call.unmute();
       }
-      this.setState({ micMuted: this.call.isMicrophoneMuted });
+      this.setState({ micMuted: this.call.isMuted });
     } catch (e) {
       console.error(e);
     }
