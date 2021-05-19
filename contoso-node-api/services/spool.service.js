@@ -1,7 +1,7 @@
 const ChatClient = require("@azure/communication-chat").ChatClient;
 const userService = require('./user.service')
 const dbClient = require("../db/index");
-const { CommunicationIdentityClient } = require("@azure/communication-administration");
+const { CommunicationIdentityClient } = require("@azure/communication-identity");
 const config = require('../config.json')
 
 const getSpoolID = async (userEmail, userType) => {
@@ -14,14 +14,14 @@ const getSpoolID = async (userEmail, userType) => {
             // generate the spool id and token
             const identityClient = new CommunicationIdentityClient(config.connectionString)
             let userResponse = await identityClient.createUser();
-            tokenResponse = await identityClient.issueToken(userResponse, ["voip", "chat"]);
+            tokenResponse = await identityClient.getToken(userResponse, ["voip", "chat"]);
             
             if (userType === 'Doctor') 
-                await userService.updateSpoolIDForDoctor(tokenResponse.id.communicationUserId, tokenResponse.token, userEmail)
+                await userService.updateSpoolIDForDoctor(userResponse.communicationUserId, tokenResponse.token, userEmail)
             else
-                await userService.updateSpoolID(tokenResponse.id.communicationUserId, tokenResponse.token, userEmail)
+                await userService.updateSpoolID(userResponse.communicationUserId, tokenResponse.token, userEmail)
 
-            return tokenResponse.id.communicationUserId
+            return userResponse.communicationUserId
         }
         catch (e) {
             console.log('Error while generating token for user.');

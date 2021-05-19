@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+**/build
 
 # misc
 .DS_Store
@@ -87,4 +87,5 @@ typings/
 
 # package-lock.json
 package-lock.json
-
+pnpm-lock.yaml
+dependencyTree.txt

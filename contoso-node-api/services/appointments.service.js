@@ -31,21 +31,21 @@ const bookAppt = async (docid, slotid, body, uname) => {
 
     if (doctors[0].availableMediums.includes(body.bookingType)) {
       var doc = doctors[0];
-      doc.slots.find(function (element) { if (element.id == slotid) return element; }).occupied = true;      
+      doc.slots.find(function (element) { if (element.id == slotid) return element; }).occupied = true;    
+      
+      // check if spool token and spool id is generated
+      if (doc.spoolID == undefined)
+        doc.spoolID = await spoolService.getSpoolID(doc.email, 'Doctor')
+
       db.collection("Doctors").update({ "id": doctors[0].id }, doc, function (err, res) {
         if (err) throw err;
         console.log("1 document updated");
       });
 
-      // check if spool token and spool id is generated
-      if (doc.spoolID == undefined)
-        doc.spoolID = await spoolService.getSpoolID(doc.email, 'Doctor')
-      
-
       await db.collection("Appointments").insertOne({
         bookingType: body.bookingType,
         docId: docid,
-        docInfo: doctors[0],
+        docInfo: doc, // doctors[0],
         patientName: body.patientName,
         patientPhone: body.patientPhone,
         patientEmail: body.patientEmail,

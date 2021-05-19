@@ -144,8 +144,8 @@ class CallCard extends Component {
           }
         };
         onCallStateChanged();
-        this.state.call.on("callStateChanged", onCallStateChanged);
-        this.state.call.on("callIdChanged", () => {
+        this.state.call.on("stateChanged", onCallStateChanged);
+        this.state.call.on("idChanged", () => {
           this.setState({ callId: this.state.call.callId });
         });
         // this.state.call.remoteParticipants.forEach((rp) =>

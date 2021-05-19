@@ -1,7 +1,7 @@
 // © Microsoft Corporation. All rights reserved.
 import React from "react";
 import "./CallSection.css";
-import { Renderer } from "@azure/communication-calling";
+import { VideoStreamRenderer } from "@azure/communication-calling";
 import profilePicture from "../../assets/images/user-profile.png";
 
 export default class StreamMedia extends React.Component {
@@ -22,7 +22,7 @@ export default class StreamMedia extends React.Component {
     });
 
     console.log("StreamMedia", this.stream, this.id);
-    let renderer = new Renderer(this.stream);
+    let renderer = new VideoStreamRenderer(this.stream);
     let view;
     let videoContainer;
 
@@ -41,7 +41,7 @@ export default class StreamMedia extends React.Component {
         `stream=${this.stream.type}, isAvailableChanged=${this.stream.isAvailable}`
       );
       if (this.stream.isAvailable) {
-        renderer = !renderer ? new Renderer(this.stream) : renderer;
+        renderer = !renderer ? new VideoStreamRenderer(this.stream) : renderer;
         this.setState({ isAvailable: true });
         await renderStream();
       } else {
