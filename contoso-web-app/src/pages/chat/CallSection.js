@@ -182,12 +182,11 @@ class CallSection extends Component {
         this.setState({ callId: this.call.id });
       });
 
-      this.call.on("isRecordingActiveChanged", () => {
-        console.log("isRecordingActiveChanged ", this.call.isRecordingActive);
-      });
-
-      this.call.on("isMicrophoneMutedChanged", () => {
-        this.setState({ micMuted: this.call.isMicrophoneMuted });
+      // this.call.on("isRecordingActiveChanged", () => {
+      //   console.log("isRecordingActiveChanged ", this.call.isRecordingActive);
+      // });
+      this.call.on("isMutedChanged", () => {
+        this.setState({ micMuted: this.call.isMuted });
       });
 
       this.call.on("isScreenSharingOnChanged", () => {
@@ -351,12 +350,12 @@ class CallSection extends Component {
 
   async handleMicOnOff() {
     try {
-      if (!this.call.isMicrophoneMuted) {
+      if (!this.call.isMuted) {
         await this.call.mute();
       } else {
         await this.call.unmute();
       }
-      this.setState({ micMuted: this.call.isMicrophoneMuted });
+      this.setState({ micMuted: this.call.isMuted });
     } catch (e) {
       console.error(e);
     }
@@ -388,6 +387,7 @@ class CallSection extends Component {
   }
 
   cameraDeviceSelectionChanged = async (event, item) => {
+    // console.log('camera device state changed');
     const cameras = await this.deviceManager.getCameras();
     const cameraDeviceInfo = cameras.find((cameraDeviceInfo) => {
       return cameraDeviceInfo.id === item.key;

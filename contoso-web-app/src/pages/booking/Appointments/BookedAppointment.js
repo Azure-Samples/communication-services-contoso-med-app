@@ -19,8 +19,8 @@ const BookedAppointment = ({ appointmentsList, getActiveAppointments }) => {
     return (
         <>
             {(appointmentsList != undefined && appointmentsList.length != 0) ? (
-                appointmentsList.map(appointment => (
-                    <Card className="doctor-card">
+                appointmentsList.map((appointment, index) => (
+                    <Card key={index} className="doctor-card">
                         <Row>
                             <Col className="doctor-profile-column" xs={2} md={2} lg={2} style={{ maxWidth: '108px' }} >
                                 <img className="doctor-profile" src={constants.endpoint + '/images/' + appointment.docInfo.pictureUrl} alt="" />

@@ -111,7 +111,7 @@ const getAllMessages = async (threadId) => {
     }
 
     let messages = [];
-    let messageIterator = chatThreadClient.listMessages()
+    let messageIterator = chatThreadClient.listMessages();
 
     let next = await messageIterator.next()
     while (!next.done) {
@@ -121,5 +121,9 @@ const getAllMessages = async (threadId) => {
         }
         next = await messageIterator.next()
     }
+
+    // console.log(`Received ${messages.length} messages`);
+    // console.dir(messages);
+
     return messages.reverse();
 }

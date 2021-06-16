@@ -29,10 +29,10 @@ import {
                     ...state.messages, 
                     { 
                         sender: { 
-                            communicationUserId: action.payload.newMessage.sender.user.communicationUserId 
+                            communicationUserId: action.payload.newMessage.sender.communicationUserId 
                         }, 
-                        senderDisplayName: action.payload.newMessage.sender.displayName, 
-                        content: { message: action.payload.newMessage.content }, 
+                        senderDisplayName: action.payload.newMessage.senderDisplayName, 
+                        content: { message: action.payload.newMessage.message }, 
                         createdOn: action.payload.newMessage.createdOn 
                     }
                 ]

@@ -12,7 +12,7 @@ const ChatArea = ({ authInfo, selectedDoctor, selectedPatient, createThread, sen
     const [message, setMessage] = useState('')
 
     const chatBubbles = (messages.length > 0) ? messages.map(message => {
-        return (<tr className="chat-bubble" key={message.messageId}>
+        return (<tr className="chat-bubble" key={message.id}>
             <td>
             <div className={message.sender.communicationUserId === authInfo.spoolID ? "sender-chat-bubble" : "receiver-chat-bubble"}>
                     <div className="message-user-name">{message.sender.communicationUserId === authInfo.spoolID ? "You" : message.senderDisplayName}</div>

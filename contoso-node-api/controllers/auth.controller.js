@@ -2,7 +2,7 @@ const bycript = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config.json');
 const userService = require('../services/user.service');
-const { CommunicationIdentityClient } = require('@azure/communication-administration')
+const { CommunicationIdentityClient } = require('@azure/communication-identity')
 const dbClient = require('../db/index')
 
 const login = async (req, res) => {
@@ -19,12 +19,12 @@ const login = async (req, res) => {
         let tokenResponse = await getTokenResponse(userIdentity)
 
         // update the users list
-        await userService.updateSpoolID(tokenResponse.user.communicationUserId, tokenResponse.token, email)
+        await userService.updateSpoolID(tokenResponse.communicationUserId, tokenResponse.token, email)
         res.status(200).json({
             email: email,
             token: token,
             name: userIdentity.name,
-            spoolID: tokenResponse.user.communicationUserId,
+            spoolID: tokenResponse.communicationUserId,
             spoolToken: tokenResponse.token,
             userType: 'Patient'
         });
@@ -47,12 +47,12 @@ const doctorLogin = async (req, res) => {
         let tokenResponse = await getTokenResponse(userIdentity)
 
         // update the users list
-        await userService.updateSpoolIDForDoctor(tokenResponse.user.communicationUserId, tokenResponse.token, email)
+        await userService.updateSpoolIDForDoctor(tokenResponse.communicationUserId, tokenResponse.token, email)
         res.status(200).json({
             email: email,
             token: token,
             name: 'Dr. ' + userIdentity.name,
-            spoolID: tokenResponse.user.communicationUserId,
+            spoolID: tokenResponse.communicationUserId,
             spoolToken: tokenResponse.token,
             userType: 'Doctor'
         });
@@ -68,14 +68,22 @@ const getTokenResponse = async (userIdentity) => {
     let tokenResponse = undefined;
     if (userIdentity !== undefined && userIdentity.user !== undefined && userIdentity.user.communicationUserId != undefined && userIdentity.user.communicationUserId != "") {
         console.log("just updating token as user already exists...");
-        tokenResponse = await identityClient.issueToken({ communicationUserId: userIdentity.user.communicationUserId }, ["voip", "chat"])
+        tokenResponse = await identityClient.getToken({ communicationUserId: userIdentity.user.communicationUserId }, ["voip", "chat"]);
+        console.log(tokenResponse);
+        return {
+            "communicationUserId": userIdentity.user.communicationUserId,
+            ...tokenResponse
+        };
     }
     else {
         let userResponse = await identityClient.createUser();
-        tokenResponse = await identityClient.issueToken(userResponse, ["voip", "chat"]);
+        tokenResponse = await identityClient.getToken(userResponse, ["voip", "chat"]);
+        console.log(tokenResponse)
+        return {
+            "communicationUserId": userResponse.communicationUserId,
+            ...tokenResponse
+        }
     }
-    console.log(tokenResponse)
-    return tokenResponse
 }
 
 exports.login = login;
